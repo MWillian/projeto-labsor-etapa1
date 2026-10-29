@@ -384,17 +384,12 @@ traceroute 8.8.8.8
    * **Causa:** Clones gerados no VirtualBox sem redefinir o endereço MAC herdaram a mesma interface de rede da VM Base.
    * **Solução:** No momento da clonagem e importação das VMs nos 4 PCs do laboratório, selecionou-se obrigatoriamente a opção *"Gerar novos endereços MAC para todas as placas de rede"*.
 
-2. **Bloqueio de Pacotes em Modo Ponte no VirtualBox:**
-   * **Sintoma:** O Gateway e as VMs clientes não conseguiam trocar pacotes ICMP através do switch físico.
-   * **Causa:** O VirtualBox bloqueava tráfego com endereços MAC virtuais por padrão.
-   * **Solução:** Em todas as placas em ponte (Bridge Adapters) do VirtualBox, alterou-se a opção **Modo Promíscuo** nas configurações avançadas para **"Permitir Tudo" (Allow All)**.
-
-3. **Incapacidade das VMs Clientes Acessarem a Internet:**
+2. **Incapacidade das VMs Clientes Acessarem a Internet:**
    * **Sintoma:** As VMs clientes pingavam o Gateway (`192.168.26.33`), mas recebiam tempo limite ao tentar pingar `8.8.8.8` ou `google.com`.
    * **Causa:** O parâmetro de encaminhamento de pacotes (`ip_forward`) não estava habilitado no kernel do Gateway.
    * **Solução:** Executou-se `sudo sysctl -w net.ipv4.ip_forward=1` e inseriu-se a regra `iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE` na interface WAN do Gateway.
 
-4. **Erro de Resolução de Nomes (`Temporary failure in name resolution`):**
+3. **Erro de Resolução de Nomes (`Temporary failure in name resolution`):**
    * **Sintoma:** O `ping 8.8.8.8` funcionava na VM cliente, mas o `ping google.com` falhava.
    * **Causa:** Ausência de servidores DNS externos válidos no arquivo `/etc/netplan/00-installer-config.yaml` da VM cliente.
    * **Solução:** Adicionaram-se os servidores DNS `172.20.20.1`, `1.1.1.1` e `8.8.8.8` na seção `nameservers` do Netplan e atualizou-se o serviço com `sudo netplan apply`.
