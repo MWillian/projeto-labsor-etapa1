@@ -1,10 +1,11 @@
 # Roteiro de Reprodução e Relatório Técnico — LSOR (Etapa 1)
 ## Rede Virtualizada com 8 VMs Clientes e 1 Gateway NAT
-
+## INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE ALAGOAS
 * **Disciplina:** Laboratório de Sistemas Operacionais e Redes (LSOR)
 * **Turma:** `bsi-26-2` (2026.2)
 * **Grupo:** Grupo 2
 * **Data da Prática:** 20/10/2026
+* **Professor:** Alaelson Jatobá
 * **Integrantes e Usuários:**
   * Matheus Willian do Nascimento Oliveira (`matheus.nascimento`)
   * José Pedro Costa Duda (`jose.duda`)
